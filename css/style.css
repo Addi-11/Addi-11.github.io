@@ -95,7 +95,7 @@ html {
 #home {
   height: 100vh;
   min-height: 500px;
-  background: url(../images/bg.jpg) no-repeat center;
+  background: url(../images/bg2.jpg) no-repeat center;
   background-size: cover;
   background-attachment: fixed;
 }
@@ -148,13 +148,15 @@ html {
 #home .buttons a {
   display: inline-block;
   margin: 15px 30px;
-  color: #48dbfb;
+  /* color: #48dbfb; */
+  color: #fff;
   font-size: 15px;
   font-weight: 500;
   width: 180px;
-  border: 1px solid;
+  border: 2px solid;
   padding: 14px 0;
   transition: 0.2s linear;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 #home .buttons a:hover,
 #home .buttons a:nth-child(2) {
@@ -162,8 +164,10 @@ html {
   color: #fff;
 }
 #home .buttons a:nth-child(2):hover {
-  background: transparent;
-  color: #48dbfb;
+  /* background: transparent;
+  color: #48dbfb; */
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
 }
 
 section {
@@ -297,7 +301,8 @@ section {
 
 /* --------------- Services */
 section.dark {
-  background-color: #353b48;
+  /* background-color: #353b48; */
+  background-color: rgba(0, 0, 0, 0.9);
 }
 section.dark .section-title {
   color: #f1f1f1;
@@ -517,10 +522,10 @@ section.dark .section-title::after {
   color: #fff;
 }
 footer {
-  background: url(../images/bg.jpg) no-repeat center;
+  background: url(../images/bg2.jpg) no-repeat;
   text-align: center;
   color: #fff;
-  padding: 80px 0;
+  padding: 50px 0;
 }
 .copyright {
   margin-bottom: 20px;
