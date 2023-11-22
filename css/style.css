@@ -249,6 +249,11 @@ section {
   height: 45px;
   margin: 20px;
 }
+
+.skills p {
+  margin-top: 20px;;
+}
+
 .skill {
   width: calc(50% - 20px);
   margin: 15px 0;
