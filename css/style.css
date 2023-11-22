@@ -389,7 +389,16 @@ section.dark .section-title::after {
 .block p {
   font-size: 15px;
   color: #444;
+  margin-left: 40px;
 }
+
+.block ul {
+  font-size: 15px;
+  color: #444;
+  margin-left: 40px;
+  list-style-type: circle;
+}
+
 .block img{
   height: 30px;
   margin-right:10px;
