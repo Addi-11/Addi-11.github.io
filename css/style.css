@@ -346,12 +346,12 @@ section.dark .section-title::after {
 }
 /* --------------- Services */
 /* --------------- Eduction */
-.time-line,
-.works {
+.time-line{
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
 .block {
   width: 100%;
   background-color: #fff;
@@ -404,12 +404,19 @@ section.dark .section-title::after {
   margin-right:10px;
 }
 /* --------------- Eduction */
-/* --------------- Works */
+/* --------------- Project Works */
+.works{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 .work {
   width: calc(33% - 10px);
+  max-height: 190px;
   overflow: hidden;
   border-radius: 5px;
-  margin: 10px 0;
+  margin: 10px 6px;
   cursor: pointer;
   position: relative;
 }
@@ -438,6 +445,17 @@ section.dark .section-title::after {
   transition: 0.4s;
   opacity: 0;
 }
+.mfp-figure {
+  /* padding: 0 50px !important; */
+}
+
+.mfp-img {
+  max-height: 57vh !important;
+  min-height: 52vh!important;
+  max-width: 87vh !important;
+  min-width: 82vh !important;
+  /* padding: 0 50px !important; */
+}
 
 .mfp-counter {
   top: auto;
@@ -447,6 +465,8 @@ section.dark .section-title::after {
   color: #fff;
   text-align: justify;
   margin: 10px 0;
+  padding: unset;
+  margin-top: 30px;
 }
 
 .mfp-title a {
@@ -561,6 +581,16 @@ footer {
   display: none;
 }
 
+@media(max-width:760px) {
+  .mfp-arrow {
+    display: none !important;
+  }
+  .mfp-img {
+    width: 100% !important;
+    min-width: 0px !important;
+    /* max-width: none !important; */
+  }
+}
 /* --------------- Contacts */
 @media (max-width: 900px) {
   .menu-toggler {
