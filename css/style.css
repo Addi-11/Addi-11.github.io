@@ -413,6 +413,8 @@ section.dark .section-title::after {
 
 .work {
   width: calc(33% - 10px);
+  flex: 1 1 calc(33% - 20px); /* Adjust flex-grow, flex-shrink, and flex-basis */
+  max-width: 300px; /* Set a max width to prevent stretching */
   max-height: 190px;
   overflow: hidden;
   border-radius: 5px;
@@ -648,6 +650,8 @@ footer {
   }
   .work {
     width: calc(100% - 10px);
+    flex: 1 1 calc(50% - 20px); /* 2 items per row on medium screens */
+    
   }
   .contact-info .item {
     width: calc(100% - 1px);
@@ -667,6 +671,7 @@ footer {
   }
   .work {
     width: 100%;
+    flex: 1 1 calc(100% - 20px);
   }
   .name,
   .email {
