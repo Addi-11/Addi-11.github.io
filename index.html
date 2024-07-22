@@ -256,31 +256,37 @@
             </div>
           </a> -->
 
-          <!-- <a href="./images/projects-logo/octocat-classes.gif" class="work" title="
+          <a href="./images/projects-logo/muxy-gpt.gif" class="work" title="
           <p>
-            An online classroom web application, bridging the digital divide to make learning accessible for all. Designed to cater to schools, universities, and private tutors alike, this project aims to revolutionize education accessibility.
+            1. Made the unembedding layer hierarchical mixture of experts (MoE) layer  to optimize computational efficiency. <br>
+            2. Enhanced the vanilla GPT-2 124M model by integrating a router and MoE in the final layer, creating the Muxy model. Implemented hierarchical Mixture of Experts to distribute tasks across multiple smaller experts. <br>
+            3. Introduced router loss to train the router effectively, penalizing incorrect expert selections. <br>
+            4. Conducted experiments by training the model from scratch with various expert configurations and top-k values (4 of 8, 2 of 8, 2 of 16), as well as fine-tuning a pretrained model and training only the router, using the edu_fineweb10b dataset. <br>
+            5. Achieved a HellaSwag score of 0.3106 compared to the baseline score of 0.3068, with a 16% improvement in FLOPs.
             <br><br>
-            <a href='https://github.com/Addi-11/Virtual-Classroom'>Project Link</a> 
+            <!-- <a href=''>Project Link</a> -->
           </p>">
-            <img src="./images/projects-logo/octocat-classes.gif" alt="" />
+            <img src="./images/projects-logo/muxy-gpt.gif" alt="" />
             <div class="info">
-              <h3>MSGAN</h3>
-              <div class="cat">An online classroom webapp</div>
+              <h3>MuxyGPT</h3>
+              <div class="cat">Multiplexer of Unembedding Layers for LLMs</div>
             </div>
           </a>
 
-          <a href="./images/projects-logo/octocat-classes.gif" class="work" title="
+          <a href="./images/projects-logo/gpt2-pretrain.gif" class="work" title="
           <p>
-            An online classroom web application, bridging the digital divide to make learning accessible for all. Designed to cater to schools, universities, and private tutors alike, this project aims to revolutionize education accessibility.
+            1. Following the original paper, added technical improvements such as weight sharing, Adam optimizer, and gradient clipping. <br>
+            2. Enhancements: Employed torch.compile() for AOT compilation, reducing kernel launch overhead and enhancing execution speed. Adjusted vocab size from 50257 to 50304 using power-of-two padding for computational efficiency. Implemented precision control with float32 and bfloat16, FlashAttention, AdamW optimizer, cosine decay learning scheduler, weight decay, and gradient accumulation. <br>
+            3. Achieved a HellaSwag score of 0.306 from 0.282 of the original and validation loss of 0.311, after training for 2 full days.
             <br><br>
-            <a href='https://github.com/Addi-11/Virtual-Classroom'>Project Link</a> 
+            <a href='https://github.com/Addi-11/build-nanogpt'>Project Link</a> 
           </p>">
-            <img src="./images/projects-logo/octocat-classes.gif" alt="" />
+            <img src="./images/projects-logo/gpt2-pretrain.gif" alt="" />
             <div class="info">
-              <h3>Octocat Classes</h3>
-              <div class="cat">An online classroom webapp</div>
+              <h3>Pretrain GPT2-124M</h3>
+              <div class="cat">Optimized a GPT-2 124M model</div>
             </div>
-          </a> -->
+          </a>
 
           <a href="./images/projects-logo/octocat-classes.gif" class="work" title="
           <p>
