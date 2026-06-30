@@ -1,0 +1,70 @@
+---
+import { skills } from "../data/profile";
+---
+
+<section id="skills" class="skills-section">
+  <div class="inner">
+    <div class="section-head reveal">
+      <span class="num">05.</span>
+      <h2>Skills</h2>
+      <span class="line"></span>
+    </div>
+    <div class="skill-grid">
+      {
+        skills.map((g) => (
+          <div class="skill-card reveal">
+            <h3>{g.label}</h3>
+            <ul>
+              {g.items.map((i) => (
+                <li>{i}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills-section {
+    background: var(--bg-soft);
+    border-top: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .skill-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+  }
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 26px;
+  }
+  .skill-card h3 {
+    font-size: 1rem;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .skill-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .skill-card li {
+    position: relative;
+    padding-left: 18px;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+  }
+  .skill-card li::before {
+    content: "▹";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.85rem;
+  }
+</style>

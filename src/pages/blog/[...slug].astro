@@ -1,0 +1,201 @@
+---
+import { render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import Icon from "../../components/Icon.astro";
+import {
+  getPublishedPosts,
+  formatDate,
+  slugFromId,
+  type Post,
+} from "../../lib/blog";
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  return posts.map((post) => ({
+    params: { slug: slugFromId(post.id) },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props as { post: Post };
+const { Content } = await render(post);
+---
+
+<Base
+  title={`${post.data.title} - Aditi Singh`}
+  description={post.data.summary}
+  absoluteNavLinks={true}
+>
+  <article class="post">
+    <div class="inner narrow">
+      <a href="/blog" class="back">
+        <Icon name="arrowRight" size={15} class="flip" /> Back to writing
+      </a>
+      <header class="post-header">
+        <div class="post-meta">
+          <time datetime={post.data.date.toISOString()}>
+            {formatDate(post.data.date)}
+          </time>
+        </div>
+        <h1>{post.data.title}</h1>
+        {
+          post.data.tags.length > 0 && (
+            <div class="tags">
+              {post.data.tags.map((t: string) => (
+                <span class="chip">{t}</span>
+              ))}
+            </div>
+          )
+        }
+      </header>
+      {
+        post.data.cover && (
+          <img class="cover" src={post.data.cover} alt={post.data.title} />
+        )
+      }
+      <div class="prose">
+        <Content />
+      </div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .post {
+    padding-top: 130px;
+    padding-bottom: 100px;
+  }
+  .narrow {
+    max-width: 760px;
+  }
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-bottom: 28px;
+  }
+  .back :global(.flip) {
+    transform: rotate(180deg);
+  }
+  .back:hover {
+    text-decoration: underline;
+  }
+  .post-header {
+    margin-bottom: 36px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .post-meta {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .post-header h1 {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    margin-bottom: 18px;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .cover {
+    width: 100%;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    margin-bottom: 36px;
+  }
+
+  /* Prose / markdown styling */
+  .prose {
+    color: var(--text-dim);
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+  .prose :global(h2) {
+    font-size: 1.6rem;
+    color: var(--text);
+    margin: 44px 0 16px;
+  }
+  .prose :global(h3) {
+    font-size: 1.25rem;
+    color: var(--text);
+    margin: 32px 0 12px;
+  }
+  .prose :global(p) {
+    margin-bottom: 20px;
+  }
+  .prose :global(a) {
+    color: var(--accent);
+    border-bottom: 1px solid var(--muted);
+  }
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin: 0 0 20px 1.3em;
+  }
+  .prose :global(li) {
+    margin-bottom: 8px;
+  }
+  .prose :global(strong) {
+    color: var(--text);
+  }
+  .prose :global(blockquote) {
+    border-left: 3px solid var(--accent);
+    padding-left: 18px;
+    margin: 0 0 20px;
+    color: var(--muted);
+    font-style: italic;
+  }
+  .prose :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--bg-soft);
+    border: 1px solid var(--border-soft);
+    border-radius: 6px;
+    padding: 2px 6px;
+  }
+  .prose :global(pre) {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 18px 20px;
+    overflow-x: auto;
+    margin-bottom: 24px;
+    font-size: 0.9rem;
+  }
+  .prose :global(pre code) {
+    background: none;
+    border: none;
+    padding: 0;
+  }
+  .prose :global(img) {
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    margin: 8px 0 24px;
+  }
+  .prose :global(hr) {
+    border: none;
+    border-top: 1px solid var(--border-soft);
+    margin: 36px 0;
+  }
+  .prose :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+  }
+  .prose :global(th),
+  .prose :global(td) {
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    text-align: left;
+  }
+  .prose :global(th) {
+    background: var(--bg-soft);
+    color: var(--text);
+  }
+</style>

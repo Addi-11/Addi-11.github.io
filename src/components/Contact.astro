@@ -1,0 +1,112 @@
+---
+import { profile } from "../data/profile";
+import Icon from "./Icon.astro";
+---
+
+<section id="contact" class="contact">
+  <div class="inner contact-inner">
+    <p class="eyebrow reveal">06. What's next</p>
+    <h2 class="reveal">Let's work together</h2>
+    <p class="contact-text reveal">
+      I'm actively looking for research-assistant positions and research-oriented
+      engineering roles in deep learning. If you're working on something
+      interesting, or think I'd be a good fit for your lab or team, I'd love to
+      hear from you.
+    </p>
+
+    <form
+      action="https://formspree.io/f/mleapqyo"
+      method="POST"
+      class="contact-form reveal"
+    >
+      <div class="row">
+        <input name="name" type="text" placeholder="Your name" required />
+        <input name="email" type="email" placeholder="Your email" required />
+      </div>
+      <input name="subject" type="text" placeholder="Subject" />
+      <textarea
+        name="message"
+        rows="5"
+        placeholder="Your message"
+        required></textarea>
+      <button type="submit" class="btn btn-primary">Send message</button>
+    </form>
+
+    <a href={`mailto:${profile.email}`} class="email-link reveal">
+      <Icon name="mail" size={18} />
+      {profile.email}
+    </a>
+  </div>
+</section>
+
+<style>
+  .contact {
+    text-align: center;
+  }
+  .contact-inner {
+    max-width: 620px;
+  }
+  .contact h2 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin: 14px 0 20px;
+  }
+  .contact-text {
+    color: var(--text-dim);
+    margin-bottom: 40px;
+  }
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: left;
+    margin-bottom: 32px;
+  }
+  .contact-form .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder {
+    color: var(--muted);
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+  .contact-form button {
+    justify-content: center;
+    align-self: center;
+    padding: 14px 32px;
+  }
+  .email-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+  }
+  .email-link:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 540px) {
+    .contact-form .row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

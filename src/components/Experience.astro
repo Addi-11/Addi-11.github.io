@@ -1,0 +1,121 @@
+---
+import { experience } from "../data/profile";
+---
+
+<section id="experience" class="exp-section">
+  <div class="inner">
+    <div class="section-head reveal">
+      <span class="num">02.</span>
+      <h2>Experience</h2>
+      <span class="line"></span>
+    </div>
+    <div class="timeline">
+      {
+        experience.map((e) => (
+          <div class="tl-item reveal">
+            <div class="tl-marker">
+              <span class={e.current ? "dot current" : "dot"} />
+            </div>
+            <div class="tl-body">
+              <div class="tl-head">
+                <h3>
+                  {e.role} <span class="at">@ {e.org}</span>
+                </h3>
+                <span class="tl-period">{e.period}</span>
+              </div>
+              <ul>
+                {e.points.map((p) => (
+                  <li>{p}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .exp-section {
+    background: var(--bg-soft);
+    border-top: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .timeline {
+    position: relative;
+  }
+  .tl-item {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 20px;
+    padding-bottom: 36px;
+  }
+  .tl-marker {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  .tl-marker::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    bottom: -36px;
+    width: 2px;
+    background: var(--border);
+  }
+  .tl-item:last-child .tl-marker::before {
+    display: none;
+  }
+  .dot {
+    position: relative;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 2px solid var(--muted);
+    z-index: 1;
+    margin-top: 4px;
+  }
+  .dot.current {
+    border-color: var(--accent);
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-glow);
+  }
+  .tl-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .tl-head h3 {
+    font-size: 1.15rem;
+  }
+  .at {
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .tl-period {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .tl-body ul {
+    list-style: none;
+  }
+  .tl-body li {
+    position: relative;
+    padding-left: 20px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+  }
+  .tl-body li::before {
+    content: "▹";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+</style>

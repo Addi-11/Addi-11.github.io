@@ -1,0 +1,118 @@
+---
+import "../styles/global.css";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import Icon from "../components/Icon.astro";
+import { profile } from "../data/profile";
+
+interface Props {
+  title?: string;
+  description?: string;
+  absoluteNavLinks?: boolean;
+}
+
+const {
+  title = `${profile.name} - ${profile.role}`,
+  description = profile.intro,
+  absoluteNavLinks = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/jpeg" href="/images/black-logo.jpg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <Nav absoluteLinks={absoluteNavLinks} />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <button class="gotop" id="gotop" aria-label="Back to top">
+      <Icon name="arrowUp" size={20} />
+    </button>
+
+    <style>
+      .gotop {
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        background: var(--card);
+        color: var(--accent);
+        cursor: pointer;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(10px);
+        transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
+        z-index: 90;
+      }
+      .gotop.show {
+        opacity: 1;
+        pointer-events: auto;
+        transform: none;
+      }
+      .gotop:hover {
+        background: var(--card-hover);
+      }
+    </style>
+
+    <script>
+      const gotop = document.getElementById("gotop");
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (window.scrollY > 500) gotop?.classList.add("show");
+          else gotop?.classList.remove("show");
+        },
+        { passive: true }
+      );
+      gotop?.addEventListener("click", () =>
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      );
+
+      // Scroll reveal
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      );
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

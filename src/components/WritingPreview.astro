@@ -1,0 +1,49 @@
+---
+import { getPublishedPosts } from "../lib/blog";
+import PostCard from "./PostCard.astro";
+import Icon from "./Icon.astro";
+
+const posts = (await getPublishedPosts()).slice(0, 3);
+---
+
+{
+  posts.length > 0 && (
+    <section id="writing">
+      <div class="inner">
+        <div class="section-head reveal">
+          <span class="num">04.</span>
+          <h2>Blogs</h2>
+          <span class="line" />
+          <a href="/blog" class="see-all">
+            All posts <Icon name="arrowRight" size={15} />
+          </a>
+        </div>
+        <div class="writing-grid">
+          {posts.map((post) => (
+            <PostCard post={post} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .see-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .see-all:hover {
+    text-decoration: underline;
+  }
+  .writing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 22px;
+  }
+</style>

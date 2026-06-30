@@ -1,0 +1,68 @@
+---
+import Base from "../../layouts/Base.astro";
+import PostCard from "../../components/PostCard.astro";
+import { getPublishedPosts } from "../../lib/blog";
+
+const posts = await getPublishedPosts();
+---
+
+<Base
+  title="Blogs - Aditi Singh"
+  description="Notes on deep learning, reinforcement learning, paper reproductions, and research experiments."
+  absoluteNavLinks={true}
+>
+  <section class="blog-hero">
+    <div class="inner">
+      <p class="eyebrow reveal">Blogs</p>
+      <h1 class="reveal">Notes &amp; experiments</h1>
+      <p class="blog-intro reveal">
+        Paper reproductions, deep-learning experiments, and things I learn while
+        building. New posts are published by pushing a markdown file to the repo.
+      </p>
+    </div>
+  </section>
+
+  <section class="blog-list">
+    <div class="inner">
+      {
+        posts.length === 0 ? (
+          <p class="empty">No posts yet. Check back soon.</p>
+        ) : (
+          <div class="list-grid">
+            {posts.map((post) => (
+              <PostCard post={post} />
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </section>
+</Base>
+
+<style>
+  .blog-hero {
+    padding-top: 150px;
+    padding-bottom: 30px;
+  }
+  .blog-hero h1 {
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    margin: 10px 0 18px;
+  }
+  .blog-intro {
+    color: var(--text-dim);
+    max-width: 600px;
+  }
+  .blog-list {
+    padding-top: 30px;
+  }
+  .list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  .empty {
+    color: var(--muted);
+    text-align: center;
+    padding: 60px 0;
+  }
+</style>
